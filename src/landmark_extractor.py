@@ -1,3 +1,7 @@
+"""
+RUN AS: python landmark_extractor.py input_html output_file extraction_rules
+"""
+
 #!/usr/bin/env python
 
 import json
