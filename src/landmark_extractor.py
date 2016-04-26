@@ -11,11 +11,11 @@ from extraction.Landmark import RuleSet
 from extraction.Landmark import flattenResult
 
 
-def extractfeatures(input_file, extraction_rules):
-    if input_file:
+def extractfeatures(input_html, extraction_rules):
+    if input_html:
         try:
 
-            html = input_file
+            html = input_html
             rules = RuleSet(extraction_rules)
 
             if rules is not None:
@@ -45,6 +45,10 @@ if __name__ == '__main__':
 
     j_extraction_rules = json.loads(extraction_rules)
 
-    output_file.write(json.dumps(extractfeatures(input_file, j_extraction_rules)))
+    lines = input_file.readlines()
+    for line in lines:
+        raw_content = json.loads(line)['raw_content']
+        output_file.write(json.dumps(extractfeatures(raw_content, j_extraction_rules)))
+        output_file.write('\n')
 
     print "Thats all folks!"
