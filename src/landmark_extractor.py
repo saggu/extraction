@@ -47,8 +47,11 @@ if __name__ == '__main__':
 
     lines = input_file.readlines()
     for line in lines:
-        raw_content = json.loads(line)['raw_content']
-        output_file.write(json.dumps(extractfeatures(raw_content, j_extraction_rules)))
+        x = json.loads(line)
+        raw_content = x['raw_content']
+        extracted = extractfeatures(raw_content, j_extraction_rules)
+        extracted['doc_id'] = x['doc_id']
+        output_file.write(json.dumps(extracted))
         output_file.write('\n')
 
     print "Thats all folks!"
